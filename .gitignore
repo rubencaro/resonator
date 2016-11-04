@@ -1,0 +1,10 @@
+/_build
+/deps
+erl_crash.dump
+*.ez
+*.swp
+.directory
+
+/config/prod.exs
+
+/rel
