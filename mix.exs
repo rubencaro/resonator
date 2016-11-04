@@ -20,5 +20,5 @@ defmodule Resonator.Mixfile do
      links: %{github: "https://github.com/rubencaro/resonator"}]
   end
 
-  defp deps, do: []
+  defp deps, do: [{:ex_doc, ">= 0.0.0", only: :dev}]
 end

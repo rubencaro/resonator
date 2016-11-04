@@ -1,0 +1,1 @@
+sidebarNodes={"exceptions":[],"extras":[{"id":"api-reference","title":"API Reference","group":"","headers":[{"id":"Modules","anchor":"modules"}]}],"modules":[{"id":"Resonator","title":"Resonator","functions":[{"id":"start/2","anchor":"start/2"}]}],"protocols":[]}
