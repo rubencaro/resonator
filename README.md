@@ -16,7 +16,32 @@ Just add `{:resonator, "0.1.0"}` to your deps on `mix.exs`, and then `:resonator
 Then somewhere in your application configure the resonance like this:
 
 ```elixir
-Resonator.add(:myresonance, endpoint_config, change_fun, fire_fun)
+
+defmodule MyResonance do
+  @behaviour Resonator.Resonance
+
+  def change(_response) do
+    # ... change detection logic
+  end
+
+  def fire(_response) do
+    # ... response to change
+  end
+
+  def endpoint do
+    # ... endpoint access logic
+  end
+
+  def error(_response) do
+    # ... error handling logic
+  end
+
+  def options do
+    # ... options definition
+  end
+end
+
+Resonator.add(MyResonance)
 ```
 
 ## TODOs
