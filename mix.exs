@@ -7,7 +7,9 @@ defmodule Resonator.Mixfile do
      elixir: ">= 1.3.2",
      package: package,
      deps: deps,
-     description: "External API's change resonator" ]
+     description: "External API's change resonator",
+     test_coverage: [tool: Resonator.Cover],
+     aliases: aliases ]
   end
 
   def application do
@@ -20,5 +22,12 @@ defmodule Resonator.Mixfile do
      links: %{github: "https://github.com/rubencaro/resonator"}]
   end
 
-  defp deps, do: [{:ex_doc, ">= 0.0.0", only: :dev}]
+  defp deps do
+    [{:ex_doc, ">= 0.0.0", only: :dev},
+     {:credo, "~> 0.4", only: [:dev, :test]}]
+  end
+
+  defp aliases do
+    [test: ["test --cover", "credo"]]
+  end
 end

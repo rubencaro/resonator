@@ -1,6 +1,9 @@
 defmodule Resonator do
   use Application
 
+  @moduledoc """
+  """
+
   @doc """
     Start and supervise a single lonely worker
   """
