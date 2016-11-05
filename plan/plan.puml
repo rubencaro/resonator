@@ -1,0 +1,60 @@
+@startuml
+
+title The Resonator Plan
+
+
+rectangle Resonator
+interface Supervisor
+Resonator ..> Supervisor : start
+
+interface HTTPpoison
+
+cloud "User\nApplication" as User
+component Add
+component "Resonance\n behaviour" as Resonance
+User .> Resonance : "{endpoint_config,\n change_fun,\n fire_fun,\n options}"
+Resonance ..> Add : "{**MyResonance**}"
+
+Supervisor --> MyResonance
+Add .right..> MyResonance : add to Supervisor
+
+note bottom of MyResonance
+  It's a GenServer.
+  Polls with given period (GenServer's timeout).
+  __
+  On every poll it makes a request,
+  then evaluates ""change_fun(response)"":
+  ..
+  * If it returns **:ok** then it rests.
+  * If it returns **{:changed, response}**
+  then it executes ""fire_fun(response)""
+  and then it rests.
+end note
+
+MyResonance .>  HTTPpoison
+
+@enduml
+
+@startuml
+
+title Resonance Logic
+
+start
+
+:""handle_info(:timeout)"";
+:""poll(endpoint_config)"";
+
+if (:make request;) then ({:ok, response})
+else ({:error, reason})
+  :error_fun(reason);
+  detach
+endif
+
+if (""change_fun(response)"") then (:ok)
+  stop
+else ({:changed, response})
+  :""fire_fun(response)"";
+  stop
+endif
+
+@enduml
