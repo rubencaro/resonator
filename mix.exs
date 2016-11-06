@@ -24,6 +24,7 @@ defmodule Resonator.Mixfile do
 
   defp deps do
     [{:ex_doc, ">= 0.0.0", only: :dev},
+     {:httpoison, "~> 0.9"},
      {:credo, "~> 0.4", only: [:dev, :test]}]
   end
 
