@@ -1,4 +1,5 @@
-require Resonator.Helpers, as: H
+alias Resonator, as: R
+require R.Helpers, as: H
 
 defmodule Resonator.Resonance do
   @moduledoc """
@@ -34,13 +35,11 @@ defmodule Resonator.Resonance do
   Resonator.add(MyResonance)
   ```
   """
-  alias Resonator.Http
+  @type endpoint_definition :: keyword()
 
-  @callback change(Http.response) :: :ok | {:changed, Http.response}
-  @callback fire(Http.response) :: :ok
-  H.todo "Define return type"
-  @callback endpoint() :: keyword()
-  @callback error(Http.response) :: :ok
-  H.todo "Define return type"
-  @callback options() :: keyword()
+  @callback change(R.Http.response) :: :ok | {:changed, R.Http.response}
+  @callback fire(R.Http.response) :: :ok
+  @callback endpoint() :: endpoint_definition
+  @callback error(R.Http.response) :: :ok
+  @callback options() :: R.Resonance.Options.t
 end
